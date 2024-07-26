@@ -20,6 +20,15 @@ function mp_desactivation(){
 
 }
 
+function mp_desinstall(){
+    //borrar tablas de DB
+    //quitar configuraciones
+    //+ opciones
+}
+
 //botones de activar/desactivar plugin
 register_activation_hook( __FILE__, 'mp_install');
 register_desactivation_hook( __FILE__, 'mp_desactivation');
+
+//boton borrar (después de desactivar)
+register_uninstall_hook( __FILE__, 'mp_desinstall');
