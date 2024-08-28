@@ -12,8 +12,16 @@ Text Domain: miplugin-beziercode
 Domain Path: /languages/
 */
 
-function mp_install(){
+if( ! function_exists( 'mp_install' )){
+    function mp_install(){
 
+    }
+}
+
+if( ! class_exists( 'MP_Mi_Class' ) ){
+    class MP_Mi_Class{
+
+    }
 }
 
 function mp_desactivation(){
