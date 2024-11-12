@@ -76,3 +76,7 @@ if( is_email( $email ) ){
 }else{
     echo "No es correcto";
 }
+
+//asegurando entrada de datos
+$input = "blabla <?php echo 'hace algo';?>bla bla";
+echo sanitize_text_field($input);
