@@ -80,3 +80,18 @@ if( is_email( $email ) ){
 //asegurando entrada de datos
 $input = "blabla <?php echo 'hace algo';?>bla bla";
 echo sanitize_text_field($input);
+
+//18 dalida de datos
+$output = "<a href='".esc_url('file://google.co',['file'])."' title='Google title'> Google</a>";
+$html_permitido = [
+    'a' => [
+        'href' => [],
+        'title' => []
+    ],
+    'p' => [],
+    'h3' => []
+];
+$protocolos = [
+    'file'
+];
+echo wp_kses( $output,$html_permitido,$protocolos);
