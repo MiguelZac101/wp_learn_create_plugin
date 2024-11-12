@@ -66,3 +66,13 @@ function mfp_Add_Text()
 {
   echo "<p style='color: black;'>After the footer is loaded, my text is added!</p>";
 }
+
+//validación de datos
+$_POST['email'] = 'test@testcom';
+$email = $_POST['email'];
+
+if( is_email( $email ) ){
+    echo "Este email es correcto";
+}else{
+    echo "No es correcto";
+}
