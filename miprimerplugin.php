@@ -120,6 +120,17 @@ if ( ! function_exists( 'mp_options_page' ) ) {
             null,//plugin_dir_url( __FILE__).'img/instagram.svg',//$icon_url:string, 
             15//$position:integer|float|null 
         );
+
+        //22. submenus
+        add_submenu_page( 
+            'menu_slug',//$parent_slug:string, 
+            'page titulo',//$page_title:string, 
+            'submenu title',//$menu_title:string, 
+            'manage_options',//$capability:string, 
+            'submenu_slug',//$menu_slug:string, 
+            'mp_submenu_page_display',//$callback:callable, 
+            1//$position:integer|float|null 
+        );
     }
 }
 
@@ -131,6 +142,23 @@ function mp_pruebas_page_display(){
             <input type="text">
             <?php submit_button( 'Enviar' ); ?>
         </form>
+    </div>
+    <?php }else{
+    ?>
+    <p>
+        No tiene acceso a esta sección.
+    </p>
+    <?php
+    } ?>
+
+    <?php
+}
+
+function mp_submenu_page_display(){
+    ?>
+    <?php if(current_user_can( 'manage_options' )){ ?>
+    <div class="wrap">
+        ESTAS EN SUBMENU
     </div>
     <?php }else{
     ?>
