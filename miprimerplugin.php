@@ -95,3 +95,50 @@ $protocolos = [
     'file'
 ];
 echo wp_kses( $output,$html_permitido,$protocolos);
+
+//21. Menús de nivel superios
+if ( ! function_exists( 'mp_options_page' ) ) {
+    add_action( 'admin_menu', 'mp_option_page');
+    function mp_option_page(){
+        add_menu_page( 
+            'Page title',//$page_title:string, 
+            'Menu title',//$menu_title:string, 
+            'manage_options',//$capability:string, 
+            'menu_slug',//$menu_slug:string, 
+            'mp_pruebas_page_display',//$callback:callable, 
+            null,//'plugin_dir_url( __FILE__).'img/instagram.svg',//$icon_url:string, 
+            15//$position:integer|float|null 
+        );
+
+        //option ruta a archivo
+        add_menu_page( 
+            'Page title 2',//$page_title:string, 
+            'Menu title 2',//$menu_title:string, 
+            'manage_options',//$capability:string, 
+            plugin_dir_path( __FILE__ ).'admin/vista.php',//$menu_slug:string, 
+            null,//$callback:callable, 
+            null,//plugin_dir_url( __FILE__).'img/instagram.svg',//$icon_url:string, 
+            15//$position:integer|float|null 
+        );
+    }
+}
+
+function mp_pruebas_page_display(){
+    ?>
+    <?php if(current_user_can( 'manage_options' )){ ?>
+    <div class="wrap">
+        <form action="">
+            <input type="text">
+            <?php submit_button( 'Enviar' ); ?>
+        </form>
+    </div>
+    <?php }else{
+    ?>
+    <p>
+        No tiene acceso a esta sección.
+    </p>
+    <?php
+    } ?>
+
+    <?php
+}
