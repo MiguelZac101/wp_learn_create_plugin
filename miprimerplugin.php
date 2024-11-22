@@ -158,7 +158,12 @@ function mp_submenu_page_display(){
     ?>
     <?php if(current_user_can( 'manage_options' )){ ?>
     <div class="wrap">
-        ESTAS EN SUBMENU
+        <?php 
+        $titulo = apply_filters( 'mp_custom_filter', 'ESTAS EN SUBMENU' );
+        echo $titulo;
+        ?>
+        
+        <?php do_action( 'mp_custom_hook', 'miguel', 101 ); ?>
     </div>
     <?php }else{
     ?>
@@ -170,3 +175,15 @@ function mp_submenu_page_display(){
 
     <?php
 }
+
+//25.- custom hook
+function mp_ch($name,$num){
+    echo $name.'-'.$num;
+}
+add_action( 'mp_custom_hook', 'mp_ch', 10, 2 );
+
+//custom filter
+function mp_cf($title){
+    return '<h1>'.$title.'</h1>';
+}
+add_filter( 'mp_custom_filter', 'mp_cf' );
