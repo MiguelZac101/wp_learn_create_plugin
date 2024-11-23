@@ -187,3 +187,19 @@ function mp_cf($title){
     return '<h1>'.$title.'</h1>';
 }
 add_filter( 'mp_custom_filter', 'mp_cf' );
+
+//30.- Shortcode básicos
+function mp_shortcode_basic(){
+    return "Mi primer shortcode";
+}
+add_shortcode( 'mp_shortcode_texto', 'mp_shortcode_basic' );
+
+//remove_shortcode( 'mp_shortcode_texto' );
+
+if( shortcode_exists( 'mp_shortcode_texto' )){
+    echo "shortcode existe";
+}else{
+    echo "shortcode NO existe";
+}
+
+?>
