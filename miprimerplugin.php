@@ -202,4 +202,11 @@ if( shortcode_exists( 'mp_shortcode_texto' )){
     echo "shortcode NO existe";
 }
 
-?>
+//31.- shortcode con contenido
+function mp_shortcode_contenido($attr,$contenido){
+    //return "<p>$contenido</p>";
+    //rederizar shortcode dentro de otro
+    return "<p>".do_shortcode($contenido)."</p>";
+}
+add_shortcode( 'mp_shortcode_p', 'mp_shortcode_contenido' );
+//[mp_shortcode_p] texto ejemplo [/mp_shortcode_p]
