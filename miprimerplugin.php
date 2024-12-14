@@ -210,3 +210,20 @@ function mp_shortcode_contenido($attr,$contenido){
 }
 add_shortcode( 'mp_shortcode_p', 'mp_shortcode_contenido' );
 //[mp_shortcode_p] texto ejemplo [/mp_shortcode_p]
+
+//32.- shortcode con parámetros
+function mp_button( $attr_new, $contenido ){
+    $attr_default = [
+        'texto' => 'Por favor coloca algún texto',
+        'url'   => '#'
+    ];
+    $attr_new = array_change_key_case( (array)$attr_new, CASE_LOWER );
+    $attr_new = shortcode_atts( $attr_default, $attr_new );
+
+    return "<a href='{$attr_new['url']}'>{$attr_new['texto']}</a>";
+}
+/*
+[mi_shortcode atributo1='valor' atributo2='valor']
+Contenido
+[/mi_shortcode]
+*/
