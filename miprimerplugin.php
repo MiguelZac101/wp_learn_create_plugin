@@ -227,3 +227,61 @@ function mp_button( $attr_new, $contenido ){
 Contenido
 [/mi_shortcode]
 */
+
+//34. Uso de la API Settings
+// la idea es agregar campos dentro de los formularios de ajustes.
+
+function mp_settings_init(){
+    //registrando una nueva configuración en la página "general"
+    register_setting('general','mp_miprimera_configuracion');// es el nombre de un nuevo campo
+
+    //registrando una nueva sección en la página "general"
+    add_settings_section(
+        'mp_config_seccion',//id
+        'M primera configuración',//titulo
+        'mp_config_seccion_cb',//callback
+        'general'//page
+    );
+
+    add_settings_field(
+        'mp_config_campo1',//id
+        'Configuración 1',//titulo
+        'mp_config_campo_cb',//callback
+        'general',//page
+        'mp_config_seccion',//callable section -> id section
+        [
+            'label_for' => 'mp_campo_1',
+            'class' => 'class_field',
+            'mp_dato_personalizado' => 'valor personalizado 1'
+        ]
+    );
+
+    add_settings_field(
+        'mp_config_campo2',//id
+        'Configuración 2',//titulo
+        'mp_config_campo_cb',//callback
+        'general',//page
+        'mp_config_seccion',//callable section -> id section
+        [
+            'label_for' => 'mp_campo_2',
+            'class' => 'class_field',
+            'mp_dato_personalizado' => 'valor personalizado 2'
+        ]
+    );
+
+}
+
+add_action( 'admin_init', 'mp_settings_init' );
+
+function mp_config_seccion_cb(){
+    echo "<p>Sección mi primera configuración</p>";
+}
+
+function mp_config_campo_cb($args){
+    $mpconfig = get_option('mp_miprimera_configuracion');
+
+    $valor = isset($mpconfig[$args['label_for']])? esc_attr($mpconfig[$args['label_for']]):'';
+
+    $html = "<input class='{$args['class']}' data-custom='{$args['mp_dato_personalizado']}' type='text' name='mp_miprimera_configuracion[{$args['label_for']}]' value='$valor'>";
+    echo $html;
+}
