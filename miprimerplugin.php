@@ -96,6 +96,46 @@ $protocolos = [
 ];
 echo wp_kses( $output,$html_permitido,$protocolos);
 
+//20.- Nonces
+if( !function_exists('mp_menu_nonce') ){
+    add_action( 'admin_menu', 'mp_menu_nonce');
+    function mp_menu_nonce() {
+        add_menu_page( 
+            'Page title -> nonce',//$page_title:string, 
+            'Menu -> nonce',//$menu_title:string, 
+            'manage_options',//$capability:string, 
+            'menu_slug_nonce',//$menu_slug:string, 
+            'mp_form_nonce',//$callback:callable, 
+            null,//'plugin_dir_url( __FILE__).'img/instagram.svg',//$icon_url:string, 
+            14//$position:integer|float|null 
+        );
+    }
+}
+
+if( !function_exists('mp_form_nonce') ) {
+    function mp_form_nonce(){
+        if( current_user_can( 'edit_others_posts' )){
+            $nonce = wp_create_nonce( 'mi_nonce' );
+            //echo $nonce;
+            if( isset($_POST['nonce']) && !empty($_POST['nonce'])){
+                if( wp_verify_nonce( $_POST['nonce'], 'mi_nonce' )){
+                    echo "nonce verificado!";
+                }else{
+                    echo "el nonce no fue recibido o no es correcto";
+                }
+            }
+        }
+        ?>
+        <form action="" method="post">
+            <input type="text" name="nonce" value="<?php echo $nonce; ?>">
+            <input type="text" name="eliminar" value="eliminar">
+            <button type="submit">eliminar</button>
+        </form>
+        <?php
+        
+    }
+}
+
 //21. Menús de nivel superios
 if ( ! function_exists( 'mp_options_page' ) ) {
     add_action( 'admin_menu', 'mp_option_page');
