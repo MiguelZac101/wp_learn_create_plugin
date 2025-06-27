@@ -325,3 +325,15 @@ function mp_config_campo_cb($args){
     $html = "<input class='{$args['class']}' data-custom='{$args['mp_dato_personalizado']}' type='text' name='mp_miprimera_configuracion[{$args['label_for']}]' value='$valor'>";
     echo $html;
 }
+
+//35.- Uso de la API Options
+//permite guardar/actualizar/eliminar campos personalizados en la tabla [wpdb->prefix]_options -> wp_options
+
+$value = "custom value plugin";
+$value_update = "update value plugin";
+//add_option registra el campo y valor, solo registra una vez.
+add_option('option_custom',$value);
+//update_option permite actualizar el valor del campo
+update_option('option_custom',$value_update);
+//delete_option elimina el campo
+//delete_option('option_custom');
