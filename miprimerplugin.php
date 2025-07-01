@@ -337,3 +337,65 @@ add_option('option_custom',$value);
 update_option('option_custom',$value_update);
 //delete_option elimina el campo
 //delete_option('option_custom');
+
+//36.- Página de configuración personalizada (Renderizando el formulario)
+//crear menú
+if ( ! function_exists( 'mp_menu_custom_form' ) ) {
+    add_action( 'admin_menu', 'mp_menu_custom_form');
+    function mp_menu_custom_form(){
+        add_menu_page( 
+            'Custom Form',//$page_title:string, 
+            'Custom Form',//$menu_title:string, 
+            'manage_options',//$capability:string, 
+            'custom_form',//$menu_slug:string, 
+            'mp_custom_form_display',//$callback:callable, 
+            null,//$icon_url:string, 
+            13//$position:integer|float|null 
+        );        
+    }
+}
+//function callback de su menú
+function mp_custom_form_display(){
+    ?>
+    <?php 
+    if(current_user_can( 'manage_options' )){ 
+        
+        if( isset( $_GET['settings-updated'] ) ){
+            //agrega mensaje
+            add_settings_error( 'mp_message_updated', 'mp_message_updated', 'Esta configuración se ha guardado correctamente', 'updated' );
+        }
+        //muestra mensaje 
+        settings_errors( 'mp_message_updated' );
+        //muestra los datos del error, se puede utilizar para personalizar los mensajes
+        echo "<pre>";
+        var_dump( get_settings_errors( 'mp_message_updated' ) );
+        echo "<pre>";
+    ?>
+    <div class="wrap">        
+        <form action="options.php" method="post">
+            <?php 
+            //agrega campos necesarios para que wp guarde la información
+            settings_fields( 'general' );
+
+            //agrega los campos asignados a page general (realmente no es una página como tal)
+            // en el punto 34. Uso de la API Settings, hay una sección registrada sobre la page general, estoy usando esa sección.
+            do_settings_sections( 'general' );
+            
+            submit_button( 'Guardar cambios' ); 
+            
+            //muestra los campos simples, se puede utilizar para personalizar el formulario
+            //los datos son el page y el id de la sección
+            //do_settings_fields( 'general', 'mp_config_seccion' );
+            ?>
+        </form>
+    </div>
+    <?php }else{
+    ?>
+    <p>
+        No tiene acceso a esta sección.
+    </p>
+    <?php
+    } ?>
+
+    <?php
+}
