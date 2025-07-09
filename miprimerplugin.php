@@ -495,3 +495,9 @@ delete_post_meta(
 );
 delete_post_meta( 7, 'color', 'azul' );
  */
+
+ /*
+ 42.- Custom Fields (Campos Personalizados)
+	get_post_custom( int $post_id ) -> Retrieves post meta fields, based on post ID.
+	get_post_meta( int $post_id, string $key = '', bool $single = false ): mixed -> Retrieves a post meta field for the given post ID.
+  */
