@@ -575,6 +575,11 @@ abstract class MP_metabox{
         if( isset( $book_detalle['precio'] ) ){
             $precio = $book_detalle['precio'];
         }
+
+        $editor = '';
+        if( isset( $book_detalle['editor'] ) ){
+            $editor = $book_detalle['editor'];
+        }
         
         ?>
         <div>
@@ -582,6 +587,8 @@ abstract class MP_metabox{
             <input type="text" name="book_detalle[precio]" value="<?php echo $precio; ?>">
         </div>
         <?php
+
+        wp_editor( $editor, 'book_detalle[editor]', ['media_buttons' => true] );
 
     }
 
