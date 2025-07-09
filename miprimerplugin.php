@@ -501,3 +501,41 @@ delete_post_meta( 7, 'color', 'azul' );
 	get_post_custom( int $post_id ) -> Retrieves post meta fields, based on post ID.
 	get_post_meta( int $post_id, string $key = '', bool $single = false ): mixed -> Retrieves a post meta field for the given post ID.
   */
+
+// 43.- Metaboxes personalizados
+//los metaboxes son las cajas que contienen a los customfield cuando registras/editas un cpt
+//ejem 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' (la caja que los contiene)
+function mp_add_meta_box(){
+    add_meta_box(
+        'custom_meta_box',//id
+        'Datos extra del book',//titulo
+        'meta_box_html',//callback
+        'book' //name cpt, que esta caja aparesca para estos CPT, puede ser un array de CTP si quieres que aparesca en varios [ post , book]
+    );
+}
+
+add_action( 'add_meta_boxes', 'mp_add_meta_box');
+
+function meta_box_html($post){
+    $book_detalle = get_post_meta( $post->ID, 'book_detalle' , true );
+    $precio = '';
+    if( isset( $book_detalle['precio'] ) ){
+        $precio = $book_detalle['precio'];
+    }
+    
+    ?>
+    <div>
+        <label for="precio">Precio</label>
+        <input type="text" name="book_detalle[precio]" value="<?php echo $precio; ?>">
+    </div>
+    <?php
+
+}
+
+function save_meta_box( $post_id ){
+    if( array_key_exists( 'book_detalle' , $_POST ) ){
+        update_post_meta( $post_id, 'book_detalle', $_POST['book_detalle'] );
+    }
+}
+
+add_action( 'save_post', 'save_meta_box' );
