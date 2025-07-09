@@ -505,18 +505,25 @@ delete_post_meta( 7, 'color', 'azul' );
 // 43.- Metaboxes personalizados
 //los metaboxes son las cajas que contienen a los customfield cuando registras/editas un cpt
 //ejem 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' (la caja que los contiene)
+/*
 function mp_add_meta_box(){
     add_meta_box(
         'custom_meta_box',//id
         'Datos extra del book',//titulo
         'meta_box_html',//callback
-        'book' //name cpt, que esta caja aparesca para estos CPT, puede ser un array de CTP si quieres que aparesca en varios [ post , book]
+        'book', //name cpt, que esta caja aparesca para estos CPT, puede ser un array de CTP si quieres que aparesca en varios [ post , book]
+        'side', //'normal', 'side', and 'advanced'
+        'high', //Accepts 'high', 'core', 'default', or 'low'. Default 'default'
+        [ 'uno', 'dos' => 1, 2 ] //argumentos que se pueden pasar
     );
 }
 
 add_action( 'add_meta_boxes', 'mp_add_meta_box');
 
-function meta_box_html($post){
+function meta_box_html($post, $medatabox){
+
+    var_dump($medatabox); //$medatabox['args'] : argumentos pasados
+
     $book_detalle = get_post_meta( $post->ID, 'book_detalle' , true );
     $precio = '';
     if( isset( $book_detalle['precio'] ) ){
@@ -539,3 +546,51 @@ function save_meta_box( $post_id ){
 }
 
 add_action( 'save_post', 'save_meta_box' );
+*/
+
+//44. Agregando un metabox orientado a objetos
+
+abstract class MP_metabox{
+
+    public static function add(){
+
+        add_meta_box(
+            'custom_meta_box',//id
+            'Datos extra del book',//titulo
+            [self::class , 'html'],//callback
+            'book', //name cpt, que esta caja aparesca para estos CPT, puede ser un array de CTP si quieres que aparesca en varios [ post , book]
+            'side', //'normal', 'side', and 'advanced'
+            'high', //Accepts 'high', 'core', 'default', or 'low'. Default 'default'
+            [ 'uno', 'dos' => 1, 2 ] //argumentos que se pueden pasar
+        );
+
+    }
+
+    public static function html( $post, $metabox ){
+
+        var_dump($metabox); //$metabox['args'] : argumentos pasados
+
+        $book_detalle = get_post_meta( $post->ID, 'book_detalle' , true );
+        $precio = '';
+        if( isset( $book_detalle['precio'] ) ){
+            $precio = $book_detalle['precio'];
+        }
+        
+        ?>
+        <div>
+            <label for="precio">Precio</label>
+            <input type="text" name="book_detalle[precio]" value="<?php echo $precio; ?>">
+        </div>
+        <?php
+
+    }
+
+    public static function save( $post_id ){
+        if( array_key_exists( 'book_detalle' , $_POST ) ){
+            update_post_meta( $post_id, 'book_detalle', $_POST['book_detalle'] );
+        }
+    }
+}
+
+add_action( 'add_meta_boxes', ['MP_metabox', 'add'] );
+add_action( 'save_post', ['MP_metabox', 'save'] );
