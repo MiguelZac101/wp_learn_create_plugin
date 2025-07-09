@@ -457,3 +457,41 @@ function wpdocs_codex_book_init() {
 }
 
 add_action( 'init', 'wpdocs_codex_book_init' );
+
+//41.- Gestión de metadatos de una publicación (post)
+// metadatos son campos que se agregan en le tabla [wpdb->prefix]->postmeta y estan asociados a un post
+//para este ejemplo hay un CPT con id 7
+/*
+add_post_meta(
+    int $post_id,
+    string $meta_key,
+    mixed $meta_value,
+    bool $unique = false // si es true registra varios valores con el mismo campo color->rojo, color->azul, etc
+);
+*/
+add_post_meta( 7, 'color', 'rojo', true  );
+/*
+update_post_meta(
+    int $post_id,
+    string $meta_key,
+    mixed $meta_value,
+    mixed $prev_value = ‘’//este valor tiene que coincidir con el anterior, es como un buscar reemplazar.
+);
+*/
+update_post_meta( 7, 'color', 'azul' );
+/*
+get_post_meta(
+    int $post_id,
+    string $meta_key = ‘’,
+    bool $single = false// false -> array, true -> single
+);
+get_post_meta( 7, 'color' );
+*/
+/*
+delete_post_meta(
+    int $post_id,
+    string $meta_key,
+    mixed $meta_value
+);
+delete_post_meta( 7, 'color', 'azul' );
+ */
