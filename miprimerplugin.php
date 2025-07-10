@@ -601,3 +601,20 @@ abstract class MP_metabox{
 
 add_action( 'add_meta_boxes', ['MP_metabox', 'add'] );
 add_action( 'save_post', ['MP_metabox', 'save'] );
+
+//46. Encolando un archivo de estilos (.css)
+function load_styles( $hook ) {
+    //toplevel_page_[page]
+    if( $hook != 'toplevel_page_custom_form'){
+        return;
+    }
+
+    wp_enqueue_style( 
+        'estilos', 
+        plugins_url('admin/css/styles.css',__FILE__), 
+        array(), 
+        '1.0', 
+        'all' 
+    );
+}
+add_action( 'admin_enqueue_scripts', 'load_styles' );
