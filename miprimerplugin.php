@@ -603,13 +603,13 @@ add_action( 'add_meta_boxes', ['MP_metabox', 'add'] );
 add_action( 'save_post', ['MP_metabox', 'save'] );
 
 //46. Encolando un archivo de estilos (.css)
-function load_libraries( $hook ) {
+function register_libraries( $hook ) {
     //toplevel_page_[page]
     if( $hook != 'toplevel_page_custom_form'){
         return;
     }
 
-    wp_enqueue_style( 
+    wp_register_style( 
         'estilos', 
         plugins_url('admin/css/styles.css',__FILE__), 
         array(), 
@@ -618,12 +618,22 @@ function load_libraries( $hook ) {
     );
 
     //47. Encolando un archivo de Javascript (.js)
-    wp_enqueue_script( 
+    wp_register_script( 
         'script', 
         plugins_url('admin/js/script.js',__FILE__), 
         array('jquery'), //dependencias
         '1.0', 
         true //true en footer 
     );
+}
+add_action( 'admin_enqueue_scripts', 'register_libraries' );
+
+//48. Registrando archivos css y javascript
+function load_libraries($hook){
+    if( $hook != 'toplevel_page_custom_form'){
+        return;
+    }
+    wp_enqueue_style('estilos');
+    wp_enqueue_script('script');
 }
 add_action( 'admin_enqueue_scripts', 'load_libraries' );
