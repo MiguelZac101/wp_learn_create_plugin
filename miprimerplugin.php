@@ -635,5 +635,26 @@ function load_libraries($hook){
     }
     wp_enqueue_style('estilos');
     wp_enqueue_script('script');
+
+    //49. Quitando de la cola y de un registro los archivos css y js
+    //quitando de la cola
+    //wp_dequeue_style('estilos');
+    //wp_dequeue_script('script');
+
+    //desregistrando jquery
+    //wp_deregister_script( 'jquery' );
+
+    //registrando y encolando nueva version de jQuery
+    /*
+    wp_register_script( 
+        'jquery', 
+        'https://code.jquery.com/jquery-3.7.1.min.js'        
+    );
+    wp_enqueue_script('jquery');
+    */
+
+    //desregistrando los estilos
+    //wp_deregister_style( 'estilos' );
+
 }
 add_action( 'admin_enqueue_scripts', 'load_libraries' );
