@@ -603,7 +603,7 @@ add_action( 'add_meta_boxes', ['MP_metabox', 'add'] );
 add_action( 'save_post', ['MP_metabox', 'save'] );
 
 //46. Encolando un archivo de estilos (.css)
-function load_styles( $hook ) {
+function load_libraries( $hook ) {
     //toplevel_page_[page]
     if( $hook != 'toplevel_page_custom_form'){
         return;
@@ -616,5 +616,14 @@ function load_styles( $hook ) {
         '1.0', 
         'all' 
     );
+
+    //47. Encolando un archivo de Javascript (.js)
+    wp_enqueue_script( 
+        'script', 
+        plugins_url('admin/js/script.js',__FILE__), 
+        array('jquery'), //dependencias
+        '1.0', 
+        true //true en footer 
+    );
 }
-add_action( 'admin_enqueue_scripts', 'load_styles' );
+add_action( 'admin_enqueue_scripts', 'load_libraries' );
