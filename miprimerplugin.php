@@ -658,3 +658,8 @@ function load_libraries($hook){
 
 }
 add_action( 'admin_enqueue_scripts', 'load_libraries' );
+
+//51. Registrando una taxonomía para las entradas
+define( 'PLUGIN_DIR_PATH' , plugin_dir_path( __FILE__ ) );
+
+require_once PLUGIN_DIR_PATH . 'includes/taxonomias.php';
