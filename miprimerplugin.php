@@ -720,3 +720,6 @@ add_action('edited_writer', 'mp_save_writer_meta');
 require_once PLUGIN_DIR_PATH . 'includes/mp-usuarios.php';
 $mp_usuarios = new MP_usuarios();
 add_action( 'init', [$mp_usuarios , 'create'] );
+
+//60. Creando usuarios - Forma compleja
+add_action( 'init', [$mp_usuarios , 'create_option_array'] );
