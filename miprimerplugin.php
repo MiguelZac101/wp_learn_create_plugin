@@ -715,3 +715,8 @@ function mp_writer_edit_form_fields($term) {
 
 //Guardar en el formulario de edición
 add_action('edited_writer', 'mp_save_writer_meta');
+
+//59. Creando usuarios - Forma básica
+require_once PLUGIN_DIR_PATH . 'includes/mp-usuarios.php';
+$mp_usuarios = new MP_usuarios();
+add_action( 'init', [$mp_usuarios , 'create'] );
