@@ -723,3 +723,24 @@ add_action( 'init', [$mp_usuarios , 'create'] );
 
 //60. Creando usuarios - Forma compleja
 add_action( 'init', [$mp_usuarios , 'create_option_array'] );
+
+//61. Obteniendo información de un usuario
+function mp_info_user(){
+    $user_id = 3;
+    $misha_user = get_userdata( $user_id );
+    //echo "<pre>";
+    //var_dump($misha_user);
+    //echo "</pre>";
+    echo '----Nombre de usuario:'.$misha_user->first_name;
+    
+    $current_user = wp_get_current_user();//usuario actual
+    echo 'Username: ' . $current_user->user_login . '<br />';
+    echo 'User email: ' . $current_user->user_email . '<br />';
+    echo 'User first name: ' . $current_user->user_firstname . '<br />';
+    echo 'User last name: ' . $current_user->user_lastname . '<br />';
+    echo 'User display name: ' . $current_user->display_name . '<br />';
+    echo 'User ID: ' . $current_user->ID . '<br />';
+
+}
+
+add_action( 'init', 'mp_info_user');
