@@ -663,3 +663,55 @@ add_action( 'admin_enqueue_scripts', 'load_libraries' );
 define( 'PLUGIN_DIR_PATH' , plugin_dir_path( __FILE__ ) );
 
 require_once PLUGIN_DIR_PATH . 'includes/taxonomias.php';
+
+//57. Agregando un campo de meta para los términos de una taxonomía
+//ejem -> https://fullstackdigital.io/blog/add-custom-metadata-to-taxonomy-terms-in-wordpress-without-plugins/
+//Mostrar el campo en el formulario de la taxonimia.(Create)
+//do_action( “{$taxonomy}_add_form_fields”, string $taxonomy )
+
+add_action('writer_add_form_fields', 'mp_writer_add_form_fields');
+
+function mp_writer_add_form_fields(){
+  ?>
+
+  <div class="form-field">
+    <label for="mp_pseudonimo">Pseudonimo</label>
+    <input name="mp_pseudonimo" id="mp_pseudonimo" type="text" value="">   
+    <p id="mp_pseudonimo-description">Pseudonimo del escritor.</p> 
+  </div>
+
+<?php }
+
+//Guardar meta-data
+add_action('create_writer', 'mp_save_writer_meta');
+function mp_save_writer_meta($term_id){
+  if(!isset($_POST['mp_pseudonimo'])){
+    return;
+  }
+
+  update_term_meta( $term_id, 'mp_pseudonimo', sanitize_text_field( $_POST['mp_pseudonimo'] ));
+}
+
+//Agregar campo a la vista de edición (Edit)
+
+add_action('writer_edit_form_fields', 'mp_writer_edit_form_fields');
+
+function mp_writer_edit_form_fields($term) { 
+  
+  $pseudonimo = get_term_meta( $term->term_id, 'mp_pseudonimo', true );
+  // The third argument is whether it is singular: true tells it not to return an array, just the one value
+  
+  ?>
+    <tr class="form-field">
+			<th scope="row">
+                <label for="mp_pseudonimo">Pseudonimo</label>
+            </th>
+			<td>
+                <input name="mp_pseudonimo" id="mp_pseudonimo" type="text" value="<?php echo $pseudonimo ?>">                 
+			    <p id="mp_pseudonimo-description">Pseudonimo del escritor.</p>
+            </td>
+		</tr>
+<?php }
+
+//Guardar en el formulario de edición
+add_action('edited_writer', 'mp_save_writer_meta');
