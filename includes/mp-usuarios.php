@@ -69,4 +69,12 @@ class MP_usuarios {
         }
     }
 
+    //64. Eliminando usuarios
+    public function eliminar_usuario(){
+        require_once ABSPATH . 'wp-admin/includes/user.php';
+        //wp_delete_user( id, reassign );
+        //id : id del usuario a eliminar
+        //reassign : id del usuario a quien se va a reasignar todos los recursos del usuario a eliminar.
+    }
+
 }
