@@ -744,3 +744,6 @@ function mp_info_user(){
 }
 
 add_action( 'init', 'mp_info_user');
+
+//63. Actualizando usuarios
+add_action( 'init', [$mp_usuarios , 'actualizar_usuario'] );

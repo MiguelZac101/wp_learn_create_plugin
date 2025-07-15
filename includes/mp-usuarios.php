@@ -54,4 +54,19 @@ class MP_usuarios {
         }
     }
 
+    public function actualizar_usuario(){
+        $user_id = 2;        
+        $user_id = wp_update_user( [ 
+            'ID'       => $user_id, 
+            'first_name' => 'juan',
+            'last_name' => 'perez',
+        ] );
+
+        if ( !is_wp_error( $user_id ) ) {            
+            echo "el usuario a sido actualizado correctamente";
+        } else {
+            
+        }
+    }
+
 }
