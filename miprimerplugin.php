@@ -747,3 +747,6 @@ add_action( 'init', 'mp_info_user');
 
 //63. Actualizando usuarios
 add_action( 'init', [$mp_usuarios , 'actualizar_usuario'] );
+
+//65. Metadatos de usuarios - Agregando un campo
+require_once PLUGIN_DIR_PATH . 'includes/mp-add-metadata-user.php';
