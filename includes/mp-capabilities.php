@@ -17,6 +17,19 @@ class MP_Capabilities{
 
         var_dump($rolstar->capabilities);
     }
+
+    //70. Manipulando las capacidades de un usuario
+    public function edit_cap_user(){
+        $user = new WP_User(2);
+        $user->add_cap('new_capability');
+        $user->remove_cap('new_capability');
+
+        if( $user->has_cap('contributor') ){//tiene esa capacidad?
+
+        }
+
+        //$user->all_caps;  //trae todas las capacidades de ese usuario
+    }
 }
 
 /*
