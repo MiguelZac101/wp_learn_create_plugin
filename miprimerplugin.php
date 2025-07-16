@@ -750,3 +750,6 @@ add_action( 'init', [$mp_usuarios , 'actualizar_usuario'] );
 
 //65. Metadatos de usuarios - Agregando un campo
 require_once PLUGIN_DIR_PATH . 'includes/mp-add-metadata-user.php';
+
+//67. Manipulando los roles
+require_once PLUGIN_DIR_PATH . 'includes/mp-roles.php';
