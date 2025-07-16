@@ -25,6 +25,15 @@ class MP_Roles{
         //eleminar rol
         //$wp_roles->remove_role( 'rolstar' );
 
+        //68. Manipulando el rol de un usuario
+        /*
+        $user = new WP_User(2);
+        $user->add_rol( 'contributor' ); //agrega rol
+        $user->set_rol( 'new_rol' ); //reemplaza el rol existente por este nuevo.
+        $user->roles //muestra todos los roles asociados al usuario
+        $user->allcpas //muestra todas las capacidades del usuario
+        */
+
     }
 
 }
