@@ -753,3 +753,6 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-add-metadata-user.php';
 
 //67. Manipulando los roles
 require_once PLUGIN_DIR_PATH . 'includes/mp-roles.php';
+
+//73. Funciones para el uso de las peticiones (Parte 1)
+require_once PLUGIN_DIR_PATH . 'includes/mp-http.php';
