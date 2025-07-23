@@ -19,6 +19,17 @@ class MP_Http {
         //wp_remote_retrieve_headers( array $response ) //todos los headers
         //wp_remote_retrieve_header( array $response, string $header ) // un dato del header ejm 'last-modified'
     }
+
+    public function cache(){
+        $github_userinfo_wp = get_transient( 'user_wordpress' );//consigue el valor
+
+        if( $github_userinfo_wp === false ){
+            $response = wp_remote_get( 'https://api.github.com/users/wordpress' );
+            set_transient( 'user_wordpress', $response, 60*60 );//guarda del valor
+        }        
+        
+        //delete_transient( 'user_wordpress' );//elimina
+    }
 }
 
 $mp_http = new MP_Http();
