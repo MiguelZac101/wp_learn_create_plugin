@@ -63,7 +63,7 @@ class MP_usuarios {
         ] );
 
         if ( !is_wp_error( $user_id ) ) {            
-            echo "el usuario a sido actualizado correctamente";
+            //echo "el usuario a sido actualizado correctamente";
         } else {
             
         }

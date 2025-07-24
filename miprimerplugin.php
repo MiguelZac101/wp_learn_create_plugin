@@ -68,6 +68,7 @@ function mfp_Add_Text()
 }
 
 //validación de datos
+/*
 $_POST['email'] = 'test@testcom';
 $email = $_POST['email'];
 
@@ -76,11 +77,12 @@ if( is_email( $email ) ){
 }else{
     echo "No es correcto";
 }
-
+*/
 //asegurando entrada de datos
+/*
 $input = "blabla <?php echo 'hace algo';?>bla bla";
 echo sanitize_text_field($input);
-
+*/
 //18 dalida de datos
 $output = "<a href='".esc_url('file://google.co',['file'])."' title='Google title'> Google</a>";
 $html_permitido = [
@@ -94,7 +96,7 @@ $html_permitido = [
 $protocolos = [
     'file'
 ];
-echo wp_kses( $output,$html_permitido,$protocolos);
+//echo wp_kses( $output,$html_permitido,$protocolos);
 
 //20.- Nonces
 if( !function_exists('mp_menu_nonce') ){
@@ -235,13 +237,13 @@ function mp_shortcode_basic(){
 add_shortcode( 'mp_shortcode_texto', 'mp_shortcode_basic' );
 
 //remove_shortcode( 'mp_shortcode_texto' );
-
+/*
 if( shortcode_exists( 'mp_shortcode_texto' )){
     echo "shortcode existe";
 }else{
     echo "shortcode NO existe";
 }
-
+*/
 //31.- shortcode con contenido
 function mp_shortcode_contenido($attr,$contenido){
     //return "<p>$contenido</p>";
@@ -624,17 +626,29 @@ function register_libraries( $hook ) {
         array('jquery'), //dependencias
         '1.0', 
         true //true en footer 
-    );
+    );    
+
 }
 add_action( 'admin_enqueue_scripts', 'register_libraries' );
 
 //48. Registrando archivos css y javascript
 function load_libraries($hook){
+    //toplevel_page_custom_form -> toplevel_page_[page] -> page = custom_form    
     if( $hook != 'toplevel_page_custom_form'){
         return;
     }
     wp_enqueue_style('estilos');
     wp_enqueue_script('script');
+
+    //76. Configurando archivos para el uso de AJAX con jQuery
+    wp_localize_script(
+        'script', 
+        'ajax_object', 
+        array(
+            'url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce( 'mp_seg' )
+        )
+    );
 
     //49. Quitando de la cola y de un registro los archivos css y js
     //quitando de la cola
@@ -731,6 +745,7 @@ function mp_info_user(){
     //echo "<pre>";
     //var_dump($misha_user);
     //echo "</pre>";
+    /*
     echo '----Nombre de usuario:'.$misha_user->first_name;
     
     $current_user = wp_get_current_user();//usuario actual
@@ -740,7 +755,7 @@ function mp_info_user(){
     echo 'User last name: ' . $current_user->user_lastname . '<br />';
     echo 'User display name: ' . $current_user->display_name . '<br />';
     echo 'User ID: ' . $current_user->ID . '<br />';
-
+*/
 }
 
 add_action( 'init', 'mp_info_user');
@@ -756,3 +771,6 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-roles.php';
 
 //73. Funciones para el uso de las peticiones (Parte 1)
 require_once PLUGIN_DIR_PATH . 'includes/mp-http.php';
+
+//76. Configurando archivos para el uso de AJAX con jQuery
+require_once PLUGIN_DIR_PATH . 'includes/mp-ajax.php';
