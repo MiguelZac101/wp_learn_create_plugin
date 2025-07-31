@@ -607,10 +607,11 @@ add_action( 'save_post', ['MP_metabox', 'save'] );
 //46. Encolando un archivo de estilos (.css)
 function register_libraries( $hook ) {
     //toplevel_page_[page]
+    /*
     if( $hook != 'toplevel_page_custom_form'){
         return;
     }
-
+    */
     wp_register_style( 
         'estilos', 
         plugins_url('admin/css/styles.css',__FILE__), 
@@ -634,9 +635,11 @@ add_action( 'admin_enqueue_scripts', 'register_libraries' );
 //48. Registrando archivos css y javascript
 function load_libraries($hook){
     //toplevel_page_custom_form -> toplevel_page_[page] -> page = custom_form    
+    /*
     if( $hook != 'toplevel_page_custom_form'){
         return;
     }
+    */
     wp_enqueue_style('estilos');
     wp_enqueue_script('script');
 
@@ -770,7 +773,10 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-add-metadata-user.php';
 require_once PLUGIN_DIR_PATH . 'includes/mp-roles.php';
 
 //73. Funciones para el uso de las peticiones (Parte 1)
-require_once PLUGIN_DIR_PATH . 'includes/mp-http.php';
+//require_once PLUGIN_DIR_PATH . 'includes/mp-http.php';
 
 //76. Configurando archivos para el uso de AJAX con jQuery
-require_once PLUGIN_DIR_PATH . 'includes/mp-ajax.php';
+//require_once PLUGIN_DIR_PATH . 'includes/mp-ajax.php';
+
+//77. Guardando y obteniendo Metadatos de usuarios en tiempo real
+require_once PLUGIN_DIR_PATH . 'includes/mp-social-user.php';
