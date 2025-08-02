@@ -81,5 +81,43 @@ jQuery(document).ready(function($){
        
     });
 
+    //heartbeat API
+
+    wp.heartbeat.interval( 'fast' );
+
+    //envias datos
+    /*
+    $(document).on( 'heartbeat-send', function( event, data ) { 
+        data.nombre = 'miguel';
+        console.log('heartbeat-send -> nombre -> '+data.nombre);
+    } );
+*/
+    var $mp_heartbeat = $('#mp_heartbeat');
+    var $heartbeat_title = $('#heartbeat_title');
+
+    $mp_heartbeat.on('keyup', function(){
+        var datos = {
+            'text' : $mp_heartbeat.val(),
+            'enviando' : 'true'
+        };
+        wp.heartbeat.enqueue( 'mp_heartbeat', datos, false );
+    });
+
+    //recibes la respuesta del servidor
+    $(document).on( 'heartbeat-tick.mp', function( event,data,textStatus,jqXHR ) { 
+
+        if( data.hasOwnProperty( 'msg' )){
+            $mp_heartbeat.val( data.msg.text );
+            $heartbeat_title.html( data.msg.text );
+        }
+        
+        var datos = {
+            'enviando' : 'false'
+        };
+
+        wp.heartbeat.enqueue( 'mp_heartbeat', datos, false );
+
+    } );
+
 });
 

@@ -30,6 +30,10 @@ class MP_Social_user{
                 <th><label for="twitter">twitter</label></th>
                 <td><input type="text" name="mp_social[twitter]" value="" id="twitter"></td>
             </tr>
+            <tr>
+                <th><label for="heartbeat">heartbeat -> </label> <label id='heartbeat_title'></label></th>
+                <td><input type="text" name="mp_heartbeat" value="" id="mp_heartbeat"></td>
+            </tr>
         </table>
         <button id="btn_update_social">update</button>
         <?php

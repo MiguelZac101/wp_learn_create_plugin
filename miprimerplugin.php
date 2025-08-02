@@ -780,3 +780,6 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-roles.php';
 
 //77. Guardando y obteniendo Metadatos de usuarios en tiempo real
 require_once PLUGIN_DIR_PATH . 'includes/mp-social-user.php';
+
+//79. Ejemplo básico del uso del Heartbeat API
+require_once PLUGIN_DIR_PATH . 'includes/mp-heartbeat.php';
