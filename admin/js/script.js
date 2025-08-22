@@ -43,6 +43,7 @@ jQuery(document).ready(function($){
             success: function(data) {                
                 $facebook.val(data.facebook);
                 $twitter.val(data.twitter);
+                
             },
             error: function() {
             
@@ -71,7 +72,18 @@ jQuery(document).ready(function($){
             }
             ,
             success: function(data) {                
-                alert(data.resultado);
+                alert(data.resultado);   
+                
+                //notificacion
+                var datos = {
+                    'actualizado' : 'true',
+                    'current_user_id' : ajax_object.current_user_id,
+                    'user_update' : $user_id
+                };
+                wp.heartbeat.enqueue( 'mp_notificacion', datos, true );
+                console.log('presiono boton de actualizar');
+                console.log(datos);               
+
             },
             error: function() {
             
@@ -104,6 +116,7 @@ jQuery(document).ready(function($){
     });
 
     //recibes la respuesta del servidor
+    /*
     $(document).on( 'heartbeat-tick.mp', function( event,data,textStatus,jqXHR ) { 
 
         if( data.hasOwnProperty( 'msg' )){
@@ -117,7 +130,26 @@ jQuery(document).ready(function($){
 
         wp.heartbeat.enqueue( 'mp_heartbeat', datos, false );
 
-    } );
+    });
+    */
+   $(document).on( 'heartbeat-tick.mp_notificacion', function( event,data,textStatus,jqXHR ) { 
+        console.log('data.mp_notificacion -> '+data.mp_notificacion);
+        console.log('data.user_updated.display_name -> '+data.user_updated.display_name);
+
+        if( data.hasOwnProperty( 'mp_notificacion' )){
+            if(data.mp_notificacion == 'true'){
+                alert( 'Ha actualizados las redes sociales de: '+data.user_updated.display_name);
+            }
+        }
+        
+        var datos = {
+            'actualizado' : 'false',
+            'current_user_id' : ajax_object.current_user_id
+        };
+
+        wp.heartbeat.enqueue( 'mp_notificacion', datos, false );
+
+    });
 
 });
 
