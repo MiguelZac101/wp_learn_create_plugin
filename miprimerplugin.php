@@ -649,7 +649,8 @@ function load_libraries($hook){
         'ajax_object', 
         array(
             'url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce( 'mp_seg' )
+            'nonce' => wp_create_nonce( 'mp_seg' ),
+            'current_user_id' => get_current_user_id()
         )
     );
 
@@ -783,3 +784,7 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-social-user.php';
 
 //79. Ejemplo básico del uso del Heartbeat API
 require_once PLUGIN_DIR_PATH . 'includes/mp-heartbeat.php';
+
+//80-82. Creando notificación de guardado en tiempo casi real
+require_once PLUGIN_DIR_PATH . 'admin/mp-admin.php';
+require_once PLUGIN_DIR_PATH . 'includes/mp-online.php';
