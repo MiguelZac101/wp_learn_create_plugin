@@ -788,3 +788,6 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-heartbeat.php';
 //80-82. Creando notificación de guardado en tiempo casi real
 require_once PLUGIN_DIR_PATH . 'admin/mp-admin.php';
 require_once PLUGIN_DIR_PATH . 'includes/mp-online.php';
+
+
+require_once PLUGIN_DIR_PATH . 'includes/mp-widget.php';
