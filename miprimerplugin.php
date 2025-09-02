@@ -789,5 +789,7 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-heartbeat.php';
 require_once PLUGIN_DIR_PATH . 'admin/mp-admin.php';
 require_once PLUGIN_DIR_PATH . 'includes/mp-online.php';
 
-
 require_once PLUGIN_DIR_PATH . 'includes/mp-widget.php';
+
+//88. Funciones para trabajar con WP CRON
+require_once PLUGIN_DIR_PATH . 'includes/mp-cron.php';
