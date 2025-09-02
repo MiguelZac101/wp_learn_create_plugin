@@ -8,7 +8,7 @@ Author: Miguel Zack
 Author URI: https://beziercode.com.co
 License: GPL
 License URI: http://
-Text Domain: miplugin-beziercode
+Text Domain: miprimerplugin
 Domain Path: /languages/
 */
 
@@ -654,6 +654,19 @@ function load_libraries($hook){
         )
     );
 
+    //96. Traducir en archivos Javascript
+    wp_localize_script(
+        'script', 
+        'traduccion', 
+        [ 
+            'formulario' => [
+                'exito' => __('se ha guardado con exito','miprimerplugin'),
+                'error' => __('sucedio un error','miprimerplugin') 
+            ] 
+        ]
+    );
+    //en js : traduccion.formulario.exito
+
     //49. Quitando de la cola y de un registro los archivos css y js
     //quitando de la cola
     //wp_dequeue_style('estilos');
@@ -793,3 +806,6 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-widget.php';
 
 //88. Funciones para trabajar con WP CRON
 require_once PLUGIN_DIR_PATH . 'includes/mp-cron.php';
+
+//sección 18 internacionalización, idiomas
+require_once PLUGIN_DIR_PATH . 'includes/mp-internacionalizacion.php';

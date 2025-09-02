@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Nombre del plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-02 14:32+0000\n"
+"PO-Revision-Date: 2025-09-02 14:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (United States)\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
+"X-Domain: miprimerplugin"
+
+#: includes/mp-internacionalizacion.php:16
+#, php-format
+msgid "%s mensaje"
+msgid_plural "%s mensajes"
+msgstr[0] ""
+msgstr[1] ""
+
+#. 94. desambiguación por contexto (traducción para lo mismo según el contexto)
+#: includes/mp-internacionalizacion.php:19
+msgctxt "a link to the post"
+msgid "post link"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://miplugin.com/"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://beziercode.com.co"
+msgstr ""
+
+#. formato de fecha guardado
+#: includes/mp-internacionalizacion.php:24
+msgid "l jS F y"
+msgstr ""
+
+#: includes/mp-internacionalizacion.php:12
+#, php-format
+msgid "mi ciudad es %2$s y %1$s"
+msgstr ""
+
+#. Author of the plugin
+msgid "Miguel Zack"
+msgstr ""
+
+#. Name of the plugin
+msgid "Nombre del plugin"
+msgstr ""
+
+#: miprimerplugin.php:663
+msgid "se ha guardado con exito"
+msgstr "has been saved successfully"
+
+#: includes/mp-internacionalizacion.php:20
+msgctxt "submit a link"
+msgid "post link"
+msgstr ""
+
+#: miprimerplugin.php:664
+msgid "sucedio un error"
+msgstr ""
+
+#. Description of the plugin
+msgid "Éste plugin cambia el título"
+msgstr ""
