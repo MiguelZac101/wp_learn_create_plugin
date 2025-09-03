@@ -808,4 +808,7 @@ require_once PLUGIN_DIR_PATH . 'includes/mp-widget.php';
 require_once PLUGIN_DIR_PATH . 'includes/mp-cron.php';
 
 //sección 18 internacionalización, idiomas
-require_once PLUGIN_DIR_PATH . 'includes/mp-internacionalizacion.php';
+//require_once PLUGIN_DIR_PATH . 'includes/mp-internacionalizacion.php';
+
+//Sección 19: Interactuando con la base de datos ($wpdb)
+//require_once PLUGIN_DIR_PATH . 'includes/mp-wpdb.php';
