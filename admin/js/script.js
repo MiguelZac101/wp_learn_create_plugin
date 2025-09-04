@@ -151,5 +151,57 @@ jQuery(document).ready(function($){
 
     });
 
+    //Sección 20: Objeto wp.media gestor multimedia
+
+    var marco, $btnMarco = $('.btnMarco');
+    $btnMarco.click('on', function(){
+        if (marco) {
+            marco.open();
+            return;
+        }else{
+            var marco = wp.media({
+                frame : 'select',//tiene la opción "post" que es como para insertarlo dentro de un editor, usa evento "insert".
+                title : 'seleccione una imagen',
+                button : {
+                    text : 'usar esta imagen'
+                },
+                multiple : true, //seleccionar varios true
+                library : {
+                    order : 'ASC',
+                    orderby : 'title',
+                    type : 'image'
+                }
+            });
+            marco.open();
+        }    
+        
+        marco.on('select', function(){
+            //var elemento = marco.state().get('selection').toArray()[0].attributes.url;
+            var elemento = marco.state().get('selection').first().toJSON();// first 1º , cuando multiple = true
+            $('.marco .seleccion').attr('src',elemento.url);
+            console.log(elemento);
+
+            //ejemplo con each
+            $('.marco').append('<h2>$.each</h2');
+            var elementos = marco.state().get('selection').toJSON(); 
+            $.each(elementos, function(i,v){
+                $('.marco').append('<img class="seleccion" src="'+v.url+'" height="200">');
+            });
+
+            //ejemplo con map
+            $('.marco').append('<h2>map</h2');
+            marco.state().get('selection').map(function(v){
+                var e = v.toJSON();
+                $('.marco').append('<img class="seleccion" src="'+e.url+'" height="200">');
+            });            
+            
+        });
+
+        //otros eventos
+        //insert, ready, attach, open, escape, close, activate
+        //insert trabaja con frame : post
+
+    });
+
 });
 

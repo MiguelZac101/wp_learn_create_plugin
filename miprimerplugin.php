@@ -180,6 +180,15 @@ function mp_pruebas_page_display(){
     ?>
     <?php if(current_user_can( 'manage_options' )){ ?>
     <div class="wrap">
+
+        <h1>114. Generando un marco de gestión multimedia</h1>
+        <button class="btn btn-primary btnMarco">Abrir gestor de Medios.</button>    
+        <div class='marco'>
+            <img class="seleccion" src="" height="200">
+        </div>
+        
+        <br/><br/>
+
         <form action="">
             <input type="text">
             <?php submit_button( 'Enviar' ); ?>
@@ -640,6 +649,12 @@ function load_libraries($hook){
         return;
     }
     */
+
+    //114. Generando un marco de gestión multimedia
+    if( $hook == 'toplevel_page_menu_slug'){
+        wp_enqueue_media();
+    }
+
     wp_enqueue_style('estilos');
     wp_enqueue_script('script');
 
